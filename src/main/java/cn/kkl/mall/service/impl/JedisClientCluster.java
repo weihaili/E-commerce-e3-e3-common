@@ -1,11 +1,17 @@
 package cn.kkl.mall.service.impl;
 
+import java.util.List;
+
 import cn.kkl.mall.service.JedisClient;
 import redis.clients.jedis.JedisCluster;
 
 public class JedisClientCluster implements JedisClient {
 	
 	private JedisCluster jedisCluster;
+
+	public JedisCluster getJedisCluster() {
+		return jedisCluster;
+	}
 
 	public void setJedisCluster(JedisCluster jedisCluster) {
 		this.jedisCluster = jedisCluster;
@@ -19,10 +25,6 @@ public class JedisClientCluster implements JedisClient {
 	@Override
 	public String get(String key) {
 		return jedisCluster.get(key);
-	}
-
-	public JedisCluster getJedisCluster() {
-		return jedisCluster;
 	}
 
 	@Override
@@ -58,6 +60,16 @@ public class JedisClientCluster implements JedisClient {
 	@Override
 	public Long hdel(String key, String... field) {
 		return jedisCluster.hdel(key, field);
+	}
+
+	@Override
+	public Boolean hexists(String key, String field) {
+		return jedisCluster.hexists(key, field);
+	}
+
+	@Override
+	public List<String> hvals(String key) {
+		return jedisCluster.hvals(key);
 	}
 
 	@Override
